@@ -1,7 +1,8 @@
-defmodule Co2Offset.Calculators.Calculator do
+defmodule Co2Offset.Calculators.CalculatorNew do
   use Ecto.Schema
   import Ecto.Changeset
   alias Co2Offset.Calculators.Calculator
+  alias Co2Offset.Converters
   alias Co2Offset.Geo
 
   schema "calculators" do
@@ -10,6 +11,8 @@ defmodule Co2Offset.Calculators.Calculator do
     field :city_from, :string
     field :city_to, :string
     field :original_distance, :integer
+    field :original_co2, :float
+    field :original_money, :integer
 
     field :airport_from, :map, virtual: true
     field :airport_to, :map, virtual: true
@@ -29,6 +32,9 @@ defmodule Co2Offset.Calculators.Calculator do
     |> validate_required([:city_from, :city_to])
     |> put_original_distance()
     |> validate_required([:original_distance])
+    |> put_original_co2()
+    |> put_original_money()
+    |> validate_required([:original_co2, :original_money])
   end
 
   defp put_airports(changeset) do
@@ -72,6 +78,36 @@ defmodule Co2Offset.Calculators.Calculator do
         changeset
         |> put_change(:original_distance, original_distance)
 
+      _ ->
+        changeset
+    end
+  end
+
+  defp put_original_co2(changeset) do
+    case changeset do
+      %Ecto.Changeset{
+        valid?: true,
+        changes: %{original_distance: distance}
+      } ->
+        original_co2 = Converters.co2_from_plane_km(distance)
+
+        changeset
+        |> put_change(:original_co2, original_co2)
+      _ ->
+        changeset
+    end
+  end
+
+  defp put_original_money(changeset) do
+    case changeset do
+      %Ecto.Changeset{
+        valid?: true,
+        changes: %{original_co2: original_co2}
+      } ->
+        original_money = Converters.money_from_co2(original_co2)
+
+        changeset
+        |> put_change(:original_money, original_money)
       _ ->
         changeset
     end

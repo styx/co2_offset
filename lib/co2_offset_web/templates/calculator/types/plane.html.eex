@@ -36,6 +36,19 @@
           <%= @calculator.city_to %>
         </div>
       </div>
+      <%= if @additional_plane do %>
+        <div class="converter-item__examples-row converter-item__examples-row__additional">
+          <div class="converter-item__examples-from">
+            <%= @additional_plane.example_from %>
+          </div>
+          <div class="converter-item__examples-indicator">
+            <img src="<%= Routes.static_path(@socket, "/images/calculator.show/indicator-plane.svg") %>"/>
+          </div>
+          <div class="converter-item__examples-to">
+            <%= @additional_plane.example_to %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
