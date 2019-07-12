@@ -13,9 +13,9 @@ Offset your carbon footpring
 ## Install development environment
 1. Install [ASDF](https://github.com/asdf-vm/asdf).
 1. Install [Erlang](https://github.com/asdf-vm/asdf-erlang) ASDF plugin
-   - Install Erlang [Requirements](https://github.com/asdf-vm/asdf-erlang#before-asdf-install)
-   - `asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git`
-   - `export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"`
+  - Install Erlang [Requirements](https://github.com/asdf-vm/asdf-erlang#before-asdf-install)
+  - `asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git`
+  - `export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"`
 1. Install [Elixir](https://github.com/asdf-vm/asdf-elixir) ASDF plugin
    - `asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git`
 1. Install [Nodejs](https://github.com/asdf-vm/asdf-nodejs) ASDF plugin
